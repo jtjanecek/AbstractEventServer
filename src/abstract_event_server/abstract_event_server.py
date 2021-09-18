@@ -10,7 +10,7 @@ from time import sleep
 import json
 import requests
 
-class AbstractServer():
+class AbstractEventServer():
 	def __init__(self, port: int, ip='0.0.0.0'):
 		self._logger = logging.getLogger("server")
 		formatter = logging.Formatter('%(asctime)s SRVR | %(levelname)s | %(message)s')
