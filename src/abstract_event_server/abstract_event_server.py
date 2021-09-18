@@ -12,13 +12,13 @@ import requests
 
 class AbstractEventServer():
 	def __init__(self, port: int, ip='0.0.0.0'):
-		self._logger = logging.getLogger("server")
+		self.__logger = logging.getLogger("server")
 		formatter = logging.Formatter('%(asctime)s SRVR | %(levelname)s | %(message)s')
 		sh = logging.StreamHandler()
 		sh.setLevel(logging.DEBUG)
 		sh.setFormatter(formatter)
-		self._logger.addHandler(sh)
-		self._logger.setLevel(logging.DEBUG)
+		self.__logger.addHandler(sh)
+		self.__logger.setLevel(logging.DEBUG)
 
 		self._ip = ip
 		self._port = port
@@ -27,9 +27,9 @@ class AbstractEventServer():
 		return "Default response"
 
 	async def recv_req(self, request):
-		self._logger.debug(request)
+		self.__logger.debug(f"Request recv: {request}")
 		data = await request.json()
-		self._logger.debug(data)
+		self.__logger.debug(f"Data recv: {data}")
 
 		result = await self.process(data)
 
@@ -44,7 +44,7 @@ class AbstractEventServer():
 		site = web.TCPSite(runner, self._ip, self._port)    
 		await site.start()
 
-		self._logger.info(f"Serving on ('{self._ip}', {self._port}) ...")
+		self.__logger.info(f"Serving on ('{self._ip}', {self._port}) ...")
 
    	 	# wait forever
 		await asyncio.Event().wait()
