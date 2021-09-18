@@ -23,7 +23,7 @@ class AbstractEventServer():
 		self._ip = ip
 		self._port = port
 
-	def process(self, data: dict):
+	async def process(self, data: dict):
 		return "Default response"
 
 	async def recv_req(self, request):
@@ -31,7 +31,7 @@ class AbstractEventServer():
 		data = await request.json()
 		self._logger.debug(data)
 
-		result = self.process(data)
+		result = await self.process(data)
 
 		return web.Response(text=result)
 
