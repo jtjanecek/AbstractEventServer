@@ -13,7 +13,7 @@ import json
 import requests
 
 class AbstractEventServer():
-	def __init__(self, ip='0.0.0.0', port=65000, public_key='public.pem', private_key='private.key'):
+	def __init__(self, ip='0.0.0.0', port=65000, public_key='public.key', private_key='private.key'):
 		self.__logger = logging.getLogger("server")
 		formatter = logging.Formatter('%(asctime)s SRVR | %(levelname)s | %(message)s')
 		sh = logging.StreamHandler()
